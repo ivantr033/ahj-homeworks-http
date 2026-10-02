@@ -7,13 +7,14 @@ module.exports = (env, argv) => {
 
     return {
         entry: {
-            helpdesk: './src/index.js',
-            image: './src/image.js'
+            app: './src/index.js',
+            image: './src/js/imageManager.js'
         },
         output: {
             path: path.resolve(__dirname, 'dist'),
             filename: isProduction ? '[name].[contenthash].js' : '[name].js',
             clean: true,
+            publicPath: './',
         },
         devtool: isProduction ? false : 'eval-source-map',
         devServer: {
@@ -30,9 +31,7 @@ module.exports = (env, argv) => {
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: [
-                                ['@babel/preset-env', { targets: "defaults" }]
-                            ]
+                            presets: [['@babel/preset-env', { targets: "defaults" }]]
                         }
                     },
                     type: 'javascript/auto'
@@ -43,7 +42,7 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.css$/,
-                    use: [
+                    uses: [
                         isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
                         'css-loader'
                     ]
@@ -54,13 +53,16 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 template: './src/index.html',
                 filename: 'index.html',
-                chunks: ['helpdesk']
+                chunks: ['app']
             }),
+
             new HtmlWebpackPlugin({
                 template: './src/image.html',
                 filename: 'image.html',
                 chunks: ['image']
-            })
+            }),
+
+            ...(isProduction ? [new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })] : [])
         ]
     };
 };
