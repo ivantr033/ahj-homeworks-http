@@ -1,10 +1,11 @@
 # Домашнее задание к занятию "7. Работа с HTTP"
 
-[![Build Status](https://github.com)](https://github.com)
+[![Build Status](https://github.com/ivantr033/ahj-homeworks-http/actions/workflows/deploy.yml/badge.svg)](https://github.com/ivantr033/ahj-homeworks-http/actions/workflows/deploy.yml)
 
 ## 🌐 Ссылки на развертывание (GitHub Pages)
 *   **HelpDesk (Основное задание):** [Открыть приложение](https://github.io)
 *   **Modern Image Manager (Задача со звёздочкой):** [Открыть приложение](https://github.io)
+
 
 ---
 
