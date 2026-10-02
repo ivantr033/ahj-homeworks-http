@@ -3,7 +3,7 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # O cambia a master si tu rama principal se llama así
+      - main
 
 permissions:
   contents: write
@@ -20,12 +20,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-node-version: 18
-          cache: 'npm'
-          # Apuntamos el caché a la subcarpeta del frontend para máxima velocidad
+          cache: "npm"
           cache-dependency-path: helpdesk/frontend/package-lock.json
 
       - name: Install Dependencies
-        # El comando 'working-directory' le ordena al robot viajar a tu carpeta frontend real
         working-directory: helpdesk/frontend
         run: npm install
 
@@ -36,5 +34,5 @@ jobs:
       - name: Deploy static bundle to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: helpdesk/frontend/dist # Ubicación física de la carpeta compilada por Webpack
-          branch: gh-pages # Rama automática donde GitHub Actions colgará la web pública
+          folder: helpdesk/frontend/dist
+          branch: gh-pages
