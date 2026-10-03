@@ -1,19 +1,17 @@
-# Домашнее задание к занятию "7. Работа с HTTP"
+# Домашнее задание к занятию "7. Работа с HTTP" (HelpDesk)
 
 [![Build Status](https://github.com/ivantr033/ahj-homeworks-http/actions/workflows/deploy.yml/badge.svg)](https://github.com/ivantr033/ahj-homeworks-http/actions/workflows/deploy.yml)
 
-## 🌐 Ссылки на развертывание (GitHub Pages)
-*   **HelpDesk (Основное задание):** [Открыть приложение](https://github.io)
-*   **Modern Image Manager (Задача со звёздочкой):** [Открыть приложение](https://github.io)
-
+## 🌐 Ссылка на развертывание (GitHub Pages)
+*   **HelpDesk (Основное задание):** [Открыть приложение](https://ivantr033.github.io/ahj-homeworks-http/)
 
 ---
 
 ## 🛠️ Архитектура проекта и Спецификация API
 
-В рамках данного домашнего задания реализовано два независимых модуля взаимодействия с сервером по протоколу HTTP, демонстрирующих различные архитектурные стили (RPC и REST).
+В рамках данного домашнего задания реализован интерфейс службы поддержки (HelpDesk), взаимодействующий с сервером по протоколу HTTP. Модуль демонстрирует использование архитектурного стиля **RPC (Remote Procedure Call)**.
 
-### 📋 1. HelpDesk API (Архитектурный стиль RPC)
+### 📋 HelpDesk API (Архитектурный стиль RPC)
 Взаимодействие построено на вызове удаленных процедур через передачу названия метода в Query Parameters (`?method=...`). Данные передаются в формате JSON.
 
 #### **CREATE**
@@ -38,44 +36,18 @@
 
 ---
 
-### 🖼️ 2. Modern Image Manager (Архитектурный стиль REST)
-Взаимодействие построено вокруг ресурса `/files`. Идентификаторы передаются как часть URL-пути, а бинарные данные отправляются через интерфейс `FormData`.
-
-#### **CREATE**
-*   **[POST]** `http://localhost:3000/files`
-    *   *Тело запроса:* `FormData` с бинарным файлом под ключом `file`.
-    *   *Ответ:* Объект созданного файла (`{ file: { id, filename, path } }`).
-
-#### **READ**
-*   **[GET]** `http://localhost:3000/files`
-    *   *Ответ:* Массив всех загруженных файлов на сервере (`{ files: [...] }`).
-*   **[GET]** `http://localhost:3000/files/:id`
-    *   *Ответ:* Получение метаданных конкретного файла по его уникальному ID.
-
-#### **DELETE**
-*   **[DELETE]** `http://localhost:3000/files/:id`
-    *   *Ответ:* Статус `204 No Content` после физического удаления файла с диска сервера.
-
----
-
 ## 🚀 Инструкция по локальному запуску
 
-### 1. Запуск Backend серверов:
+### 1. Запуск Backend сервера:
 ```bash
-# Запуск HelpDesk Backend (Порт 7070)
-cd helpdesk/backend
-npm install
-npm start
-
-# Запуск Image Manager Backend (Порт 3000)
-cd image-manager/backend
+cd backend
 npm install
 npm start
 ```
 
 ### 2. Запуск Frontend части:
 ```bash
-cd helpdesk/frontend
+cd frontend
 npm install
 npm start
 ```
